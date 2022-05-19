@@ -78,7 +78,7 @@ of a Airbrake\Notifier object then pass a exception to the notify function.
  */
 public function report(Exception $exception)
 {
-    if ($this->shouldReport($exception)) {
+    if ($this->shouldReport($exception) && App::environment(['production', 'staging'])) {
         $airbrakeNotifier = \App::make('Airbrake\Notifier');
         $airbrakeNotifier->notify($exception);
     }
